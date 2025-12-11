@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deb's 24th Birthday</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --spider-red: #ce1126;
+            --spider-dark-red: #8a0b19;
+            --spider-blue: #002d72;
+            --text-white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Oswald', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hidden-svg {
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+
+        /* Main Card Container */
+        .card {
+            position: relative;
+            width: 500px;
+            height: 700px;
+            background-color: var(--spider-red);
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            /* Interactive hover transition */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+        }
+
+        /* Interactive Hover Effect */
+        .card:hover {
+            transform: scale(1.02) rotate(1deg);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.7);
+            border: 2px solid var(--text-white);
+        }
+
+        /* --- WRAPPER FOR CONTINUOUS SWAY MOTION --- */
+        .card-content-wrapper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            /* Background pattern */
+            background-image: 
+                radial-gradient(circle at 50% 40%, transparent 10%, var(--spider-dark-red) 11%, transparent 12%),
+                radial-gradient(circle at 50% 40%, transparent 20%, var(--spider-dark-red) 21%, transparent 22%),
+                radial-gradient(circle at 50% 40%, transparent 30%, var(--spider-dark-red) 31%, transparent 32%),
+                radial-gradient(circle at 50% 40%, transparent 40%, var(--spider-dark-red) 41%, transparent 42%),
+                radial-gradient(circle at 50% 40%, transparent 50%, var(--spider-dark-red) 51%, transparent 52%),
+                radial-gradient(circle at 50% 40%, transparent 60%, var(--spider-dark-red) 61%, transparent 62%),
+                conic-gradient(from 0deg at 50% 40%, 
+                    transparent 0deg, transparent 15deg, 
+                    var(--spider-dark-red) 15.5deg, transparent 16deg,
+                    transparent 45deg, var(--spider-dark-red) 45.5deg, transparent 46deg,
+                    transparent 75deg, var(--spider-dark-red) 75.5deg, transparent 76deg,
+                    transparent 105deg, var(--spider-dark-red) 105.5deg, transparent 106deg,
+                    transparent 135deg, var(--spider-dark-red) 135.5deg, transparent 136deg,
+                    transparent 165deg, var(--spider-dark-red) 165.5deg, transparent 166deg,
+                    transparent 195deg, var(--spider-dark-red) 195.5deg, transparent 196deg,
+                    transparent 225deg, var(--spider-dark-red) 225.5deg, transparent 226deg,
+                    transparent 255deg, var(--spider-dark-red) 255.5deg, transparent 256deg,
+                    transparent 285deg, var(--spider-dark-red) 285.5deg, transparent 286deg,
+                    transparent 315deg, var(--spider-dark-red) 315.5deg, transparent 316deg,
+                    transparent 345deg, var(--spider-dark-red) 345.5deg, transparent 346deg
+                );
+            
+            /* Fast Sway Animation */
+            animation: ambient-sway 0.7s ease-in-out infinite alternate;
+        }
+
+        /* Keyframes for the sway */
+        @keyframes ambient-sway {
+            from { transform: translateX(-10px); }
+            to { transform: translateX(10px); }
+        }
+
+        /* Top Text */
+        .top-text {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            color: var(--text-white);
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 2px;
+            line-height: 1.6;
+            font-weight: 700;
+            z-index: 2;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* Curved Title Text */
+        .title-container {
+            position: absolute;
+            top: 80px; 
+            left: 0;
+            width: 100%;
+            height: 100px;
+            pointer-events: none;
+            z-index: 20; 
+            display: flex;
+            justify-content: center;
+        }
+
+        .curved-text {
+            font-family: 'Bangers', cursive;
+            font-size: 55px; 
+            color: var(--text-white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            width: 100%;
+            text-shadow: 2px 2px 0px #000; 
+        }
+
+        .curved-text span {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform-origin: center 220px; 
+        }
+
+        /* Photo Frame */
+        .photo-container {
+            position: absolute;
+            top: 180px; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 380px; 
+            height: 380px;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--spider-blue); 
+            clip-path: url(#rounded-star);
+        }
+
+        .photo-wrapper {
+            width: 93%; 
+            height: 93%;
+            background: white;
+            clip-path: url(#rounded-star);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .photo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center; 
+        }
+
+        /* Bottom Details */
+        .details {
+            position: absolute;
+            bottom: 30px;
+            right: 20px;
+            text-align: right;
+            z-index: 25;
+        }
+
+        .details a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            line-height: 1.8;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        .details a:hover {
+            color: #ffd700;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Star Link Section */
+        .star-link-container {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 30;
+        }
+
+        .star-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-white);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .star-link:hover {
+            transform: scale(1.1);
+        }
+        
+        .star-svg {
+            fill: var(--spider-blue);
+            width: 85px;  
+            height: 85px; 
+            margin-bottom: 5px;
+            animation: spin 10s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .click-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        /* --- MOBILE RESPONSIVENESS UPDATES --- */
+        
+        /* 1. Standard Mobile Phones (approx 390px - 520px wide) */
+        @media (max-width: 520px) {
+            .card {
+                transform: scale(0.75); /* Card becomes 375px wide */
+                margin-top: -50px; 
+                margin-bottom: -50px;
+            }
+        }
+
+        /* 2. Small Mobile Phones (iPhone SE, older Androids < 380px wide) */
+        @media (max-width: 380px) {
+            .card {
+                transform: scale(0.65); /* Card becomes 325px wide - Fits safely */
+                margin-top: -80px; 
+                margin-bottom: -80px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <svg class="hidden-svg">
+        <defs>
+            <clipPath id="rounded-star" clipPathUnits="objectBoundingBox">
+                <path d="M0.5,0.03 C0.55,0.25 0.73,0.35 0.95,0.38 C0.78,0.54 0.83,0.78 0.9,0.95 C0.68,0.82 0.32,0.82 0.1,0.95 C0.17,0.78 0.22,0.54 0.05,0.38 C0.27,0.35 0.45,0.25 0.5,0.03 Z" />
+            </clipPath>
+        </defs>
+    </svg>
+
+    <div class="card">
+        <div class="card-content-wrapper">
+            <div class="top-text">
+                Calling all Heroes and Heroines<br>
+                to enter the Deb verse<br>
+                and celebrate the 24th Birthday
+            </div>
+
+            <div class="title-container">
+                <div class="curved-text">
+                    <span style="transform: translateX(-50%) rotate(-50deg);">D</span>
+                    <span style="transform: translateX(-50%) rotate(-42deg);">E</span>
+                    <span style="transform: translateX(-50%) rotate(-34deg);">B</span>
+                    <span style="transform: translateX(-50%) rotate(-27deg);">'</span>
+                    <span style="transform: translateX(-50%) rotate(-20deg);">S</span>
+                    
+                    <span style="transform: translateX(-50%) rotate(-5deg);">2</span>
+                    <span style="transform: translateX(-50%) rotate(5deg);">4</span>
+                    <span style="transform: translateX(-50%) rotate(15deg);">T</span>
+                    <span style="transform: translateX(-50%) rotate(25deg);">H</span>
+                    
+                    <span style="transform: translateX(-50%) rotate(40deg);">B</span>
+                    <span style="transform: translateX(-50%) rotate(48deg);">-</span>
+                    <span style="transform: translateX(-50%) rotate(56deg);">D</span>
+                    <span style="transform: translateX(-50%) rotate(64deg);">A</span>
+                    <span style="transform: translateX(-50%) rotate(72deg);">Y</span>
+                </div>
+            </div>
+
+            <div class="photo-container">
+                <div class="photo-wrapper">
+                    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWoyZWVtZHlpNDB0d2ozdmx0dGhucTd5YzZncTNpc2RpYmF0bTdzdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/g4iiVQ1DHb3M2SYNUe/giphy.gif" alt="Birthday Gif">
+                </div>
+            </div>
+
+            <div class="star-link-container">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScOy8EHix9wnv5CVdECHMXjJa0xcYUozEJmK39Q7cKME5ifwQ/viewform?usp=dialog" target="_blank" class="star-link">
+                    <svg class="star-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    <span class="click-text">Register here</span>
+                </a>
+            </div>
+            
+            <div class="details">
+                <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Crown+Crystal+Food+Court+Bhubaneswar" target="_blank">
+                    HOTEL CROWN CRYSTAL FOOD COURT<br>
+                    Monday, December 22 | 5:30 pm<br>
+                    C-10, Patia , Infocity Road<br>
+                    Kanan Vihar, Chandrasekharpur,<br>
+                    Bhubaneswar, Odisha 751024
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
