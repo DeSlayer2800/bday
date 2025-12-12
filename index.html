@@ -265,6 +265,19 @@
     </style>
 </head>
 <body>
+    <audio id="bg-music" loop>
+        <source src="https://files.catbox.moe/8e1h5k.mp3">
+    </audio>
+
+    <script>
+        document.addEventListener('click', function() {
+            var audio = document.getElementById("bg-music");
+            audio.volume = 0.5; // Sets volume to 50% so it's not too loud
+            audio.play().catch(function(error) {
+                console.log("Audio play failed: " + error);
+            });
+        }, { once: true }); // Only runs on the very first click
+    </script>
     <svg class="hidden-svg">
         <defs>
             <clipPath id="rounded-star" clipPathUnits="objectBoundingBox">
@@ -330,4 +343,5 @@
     </div>
 
 </body>
+
 </html>
